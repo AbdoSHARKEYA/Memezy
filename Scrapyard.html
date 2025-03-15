@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('Log in.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .gender-toggle {
+            margin-bottom: 15px;
+        }
+        .gender-toggle button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .male { background-color: blue; color: white; }
+        .female { background-color: pink; color: white; }
+        .selected { font-weight: bold; }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background: green;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="gender-toggle">
+            <button class="male selected" onclick="selectGender('male')">Male</button>
+            <button class="female" onclick="selectGender('female')">Female</button>
+        </div>
+        <form onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="hidden" id="gender" value="male">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
+    <script>
+        function selectGender(gender) {
+            document.getElementById('gender').value = gender;
+            document.querySelector('.male').classList.remove('selected');
+            document.querySelector('.female').classList.remove('selected');
+            document.querySelector('.' + gender).classList.add('selected');
+        }
+        
+        function validateForm() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let gender = document.getElementById('gender').value;
+            
+            if (username.trim() === "" || password.trim() === "") {
+                alert("Please fill in all fields.");
+                return false;
+            }
+
+            // Redirect based on gender
+            if (gender === "female") {
+                window.location.href = "female.html"; // Redirect to female page
+            } else {
+                window.location.href = "male.html"; // Redirect to male page
+            }
+
+            return false; // Prevent form from actually submitting
+        }
+    </script>
+</body>
+</html>
